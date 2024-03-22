@@ -1,10 +1,25 @@
 import "./Home.css"
-
-import basedatos from "../Utils/basedatos.json"
+import { inventario } from "../Utils/medicamentos"
 
 export function Home() {
 
-  console.log(basedatos[0])
+    //ZONA DE MANIPULACION DE DATOS
+
+    let nombrePaciente="Juan Pablo Muñetón Giraldo"
+    let sedePaciente="Suramericana"
+    console.log(inventario)
+
+    /* Los arreglos los puedo manipular para controlar qué información voy a presentar
+    
+    1. FUNCION DE FILTRADO DE DATOS
+    Condición de filtrado (Pregunta (SI/NO))
+    */
+
+    let resultado = inventario.filter (function (auxiliar) {
+        return (auxiliar.nombre=="acetaminofen" && auxiliar.dosis==10)
+    })
+
+    console.log(resultado)
 
 
     return (  //ZONA DE RENDERIZADO
@@ -18,7 +33,7 @@ export function Home() {
 
             <div className="col-12 col-md-6">
                 <h3 className="fuente">Servicios a un clic</h3>
-                <h2 className="text-muted"> HOLA <span className="fuente"> <b><u> {basedatos[0].nombreUsuario} </u></b></span></h2>
+                <h2 className="text-muted"> HOLA <span className="fuente"> <b><u> {nombrePaciente} </u></b></span></h2>
 
               {/* alt + z para organizar el texto */}
               <p>
@@ -44,17 +59,14 @@ export function Home() {
 
                 <div className="row">
                     <div className="col-12 col-md-2 mt-5">
-                    <i class="bi bi-heart-pulse-fill fs-1 fuente"></i>
+                    <i class="bi bi-person-walking fs-1 fuente"></i>
                     </div>
 
                     <div className="col-12 col-md-10 mt-5">
                         <br />
-                        <p>MÉDICO DE FAMILIA</p>
-                        <p> {basedatos[0].medicoDeFamilia} </p>
+                        <p>Doctor Miguel Restrepo Toriyama</p>
                     </div>
                 </div>
-
-                <hr />
 
                 <div className="row">
                     <div className="col-12 col-md-2 mt-5">
@@ -64,11 +76,8 @@ export function Home() {
                     <div className="col-12 col-md-10 mt-5">
                         <br />
                         <p>TIPO DE AFILIADO</p>
-                        <p> {basedatos[0].grupoDeIngreso} </p>
                     </div>
                 </div>
-
-                <hr />
 
                 <div className="row">
                     <div className="col-12 col-md-2 mt-5">
@@ -81,8 +90,6 @@ export function Home() {
                     </div>
                 </div>
 
-                <hr />
-
                 <div className="row">
                     <div className="col-12 col-md-2 mt-5">
                     <i class="bi bi-building fs-1 fuente"></i>
@@ -91,49 +98,14 @@ export function Home() {
                     <div className="col-12 col-md-10 mt-5">
                         <div className="row"> </div>
                         <p>IPS ACTUAL</p>
-                        <p> {basedatos[0].ips} </p>
                     </div>
                 </div>
 
 
-            </div>
-          </div>
-        </section>
-
-        <hr />
-
-        <section className="container my-5">
-          <div className="row">
-            <div className="col-12 col-md-5">
-              <h5>PACIENTE {basedatos[0].nombreUsuario}, éstas son tus próximas citas:</h5>
 
             </div>
           </div>
         </section>
-
-        <hr />
-
-        <section className="container">
-          <div className="row row-cols-1 row-cols-md-3">
-            {
-              basedatos[0].citasMedicas.map(function(cita){
-                return (
-                  <div className="col">
-                    <div className="card h-100 shadow px-2">
-                      <h3> {cita.especialidad} </h3>
-                      <h4> Fecha: {cita.fecha} </h4>
-                      <h5> {cita.direccion} </h5>
-
-                    </div>
-                  </div>
-                )
-              })
-            }
-
-          </div>
-        </section>
-
-        
       </>
     );
     
